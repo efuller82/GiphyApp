@@ -26,34 +26,65 @@ for (var i = 0; i < topics.length; i++){
     a.text(topics[i]);
     //adding the button to the html
     $('.buttons').append(a);
-}
+    }
 }
 
 renderButtons();
+
 //on click function 
 $('#searchButton').on('click', function(event){
     event.preventDefault();
     //grabs text from input box
     var giphyInput = $('#giphy-search').val().trim();
     //the text from the box is then added to our array
+    
+
     topics.push(giphyInput);
     renderButtons();
+
+})    
+// Event listener for all button elements
+$('button').on('click', function() {
+    // "this" keyword refers to the button that was clicked
+    var name = $(this).attr('data-name');
     
-    var queryURL = "https://api.giphy.com/v1/gifs/search?api_key=" + APIkey + "&q=" + giphyInput + "&limit=10&offset=0&rating=G&lang=en";
-    
+    //Constructing a URL search on giphy
+    var queryURL = "https://api.giphy.com/v1/gifs/search?api_key=" + APIkey + "&q=" + name + "&limit=10&offset=0&lang=en";
+
+    //performing the AJAX request
     $.ajax ({
         url: queryURL,
         method: "GET"
-    }).then(function(response) {
-        console.log(response);
-        var giphyDiv = $('<div class = "giphy">');
-
-        var rating = response.data[0].rating;
-        var pOne = $('<p>').text('Rating: ' + rating);
-
-        giphyDiv.append(pOne);
-
-        $('.giphy-results').append(giphyDiv);
     })
-})
+        // After the data comes back from the API
+        .then(function(response) {
+            console.log(response);
+            //storing an array of results in the results variable
+            var results = response.data;
+            
+            // Looping over every result item
+            for (var i = 0; i < results.length; i++) {
 
+            //creating a div for the gif
+            var giphyDiv = $('<div class = "giphy">');
+
+            //storing the result item's rating
+            var rating = results[i].rating;
+            
+            // Creating a paragraph tag with the result item's rating
+            var p = $('<p>').text('Rating: ' + rating);
+
+            // Creating an image tag
+            var topicImage = $('<img>');
+
+            //Giving the image tag a src attribute of a property pulled off the result item
+            topicImage.attr("src", results[i].images.fixed_height.url);
+            
+            // Appending the paragraph and topicImage we created to the giphyDiv we created
+            giphyDiv.append(p);
+            giphyDiv.append(topicImage);
+
+            $('.giphy-results').prepend(giphyDiv);
+    };
+})
+});
