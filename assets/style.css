@@ -1,0 +1,11 @@
+.btn {
+    margin: .3vh .5vw;
+}
+
+#giphy-search {
+    width: 25%;
+}
+
+.formSearch {
+    float: right;
+}

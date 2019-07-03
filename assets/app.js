@@ -37,7 +37,7 @@ function displayGiphyInfo() {
                 var topicImage = $('<img>');
     
                 //Giving the image tag a src attribute of a property pulled off the result item
-                topicImage.attr("src", results[i].images.fixed_height.url);
+                topicImage.attr("src", results[i].images.fixed_height_still.url);
                 
                 // Appending the paragraph and topicImage we created to the giphyDiv we created
                 giphyDiv.append(p);
@@ -61,7 +61,7 @@ for (var i = 0; i < topics.length; i++){
     //dynamically generating buttons for each topic in the array
     var a = $('<button>')
     //adding a class
-    a.addClass('topic');
+    a.addClass('topic btn btn-info');
     //adding a data-attribute with a value of the topic at index i
     a.attr('data-name', topics[i]);
     //providing the button's text with a value of the topic at index
