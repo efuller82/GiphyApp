@@ -3,7 +3,7 @@ var APIkey = "BkaUZZWcFij6J7AoQj3WtPb1R2p9O6V9"
 
 
 //array of my likes
-topics = ['South Park', 'funny faces', 'Trump', 'lazy', 'Forest Gump'];
+topics = ['South Park', 'funny faces', 'Trump', 'lazy', 'Forest Gump', 'Obama'];
 
 function displayGiphyInfo() {
     // "this" keyword refers to the button that was clicked
