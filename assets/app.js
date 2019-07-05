@@ -38,26 +38,31 @@ function displayGiphyInfo() {
     
                 //Giving the image tag a src attribute of a property pulled off the result item
                 //Also gave all data attributes to attempt to have fixed and animated images
-                topicImage.attr({"src": results[i].images.fixed_height_still.url, "data-still": results[i].images.fixed_height_still.url, "data-animate": results[i].images.fixed_height.url, "data-state": "still", "class":"gif"});
-                $('.gif').on('click', function() {
-                    var state = $(this).attr('data-state');
-                    if (state === "still") {
-                        $(this).attr("src", $(this).attr("data-animate"));
-                        $(this).attr("data-state", "animate");
-                    } else {
-                        $(this).attr("src", $(this).attr("data-still"));
-                        $(this).attr("data-state", "still");
-                    }
-                });
+                topicImage.attr({'src': results[i].images.fixed_height_still.url, 'data-still': results[i].images.fixed_height_still.url, 'data-animate': results[i].images.fixed_height.url, 'data-state': 'still', 'class':'gif'});
+               
                 // Appending the paragraph and topicImage we created to the giphyDiv we created
                 giphyDiv.append(p);
                 giphyDiv.append(topicImage);
     
-                $('.giphy-results').prepend(giphyDiv);             
+                $('.giphy-results').prepend(giphyDiv); 
             };
+            clicky();
         })
     };
-
+    
+   function clicky(){ 
+    $('.gif').on('click', function() {
+        var state = $(this).attr('data-state');
+        if (state === 'still') {
+            $(this).attr('src', $(this).attr('data-animate'));
+            $(this).attr('data-state', 'animate');
+        } else {
+            $(this).attr('src', $(this).attr('data-still'));
+            $(this).attr('data-state', 'still');
+        }
+    });
+}
+   
     // function for displaying topics data
     function renderButtons() {
 
