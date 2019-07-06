@@ -45,7 +45,7 @@ function displayGiphyInfo() {
                 giphyDiv.append(topicImage);
     
                 $('.giphy-results').prepend(giphyDiv); 
-            };
+             };
             clicky();
         })
     };
